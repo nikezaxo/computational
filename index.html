@@ -262,15 +262,17 @@
     align-items: flex-end; /* Align items at the bottom */
     margin: 50px 0; /* Margin above and below the gallery */
     overflow: hidden; /* Prevent overflow */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
 .gallery-item {
-    margin: 0 15px; /* Space between items */
+    margin: 10px; /* Adjust margin for smaller screens */
     text-align: center; /* Center text under images */
+    flex: 1 1 200px; /* Allow items to grow and shrink */
 }
 
 .gallery-item img {
-    width: 100px; /* Set width of images */
+    width: 100%; /* Set width to 100% for responsive images */
     height: auto; /* Maintain aspect ratio */
     transition: transform 0.3s; /* Transition effect on hover */
 }
@@ -284,6 +286,7 @@
     color: white; /* Text color */
     font-size: 1.2em; /* Font size for the names */
 }
+
 
 </style>
 
