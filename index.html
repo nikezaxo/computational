@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanta Lab</title>
+    <!-- Include Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- Include Vanta.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        @font-face {
+            font-family: 'Yoster';
+            src: url('fonts/yoster.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevents scrolling */
+            font-family: 'Yoster', cursive; /* Use the Yoster font for the main body */
+        }
+        #vanta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Places the background behind other content */
+        }
+        .content {
+            position: relative;
+            z-index: 1; /* Places content above the background */
+            color: white; /* Change text color for visibility */
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        .logo {
+            width: 150px; /* Adjust size as needed */
+            height: 150px; /* Ensure height is equal for a round shape */
+            border-radius: 50%; /* Makes the logo round */
+            background: url('images/logo.jpg') no-repeat center center; /* Use logo as background */
+            background-size: cover; /* Cover the entire area */
+            opacity: 0; /* Start invisible */
+            animation: particleEvolve 2s forwards; /* Animation to evolve from particles */
+            animation-delay: 0.5s; /* Delay before starting the animation */
+        }
+        @keyframes particleEvolve {
+            0% {
+                opacity: 0;
+                transform: scale(0.1); /* Start small */
+                filter: blur(10px); /* Start blurred */
+            }
+            50% {
+                opacity: 1;
+                filter: blur(5px); /* Reduce blur */
+            }
+            100% {
+                transform: scale(1); /* End at normal size */
+                filter: blur(0); /* No blur */
+                opacity: 1; /* Ensure it stays visible */
+            }
+        }
+        /* Side Menu Styles */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Start off-screen */
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%); /* Gradient background */
+            color: black; /* Black text */
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            transition: left 0.4s ease, opacity 0.4s ease; /* Smooth transition for position and opacity */
+            padding: 30px;
+            z-index: 2; /* Places menu above the background */
+            border-radius: 0 10px 10px 0; /* Rounded corners */
+            opacity: 0; /* Start fully transparent */
+            pointer-events: none; /* Prevent interaction when hidden */
+        }
+        .side-menu h2 {
+            margin-top: 0;
+            font-size: 2.5em; /* Heading size */
+        }
+        .side-menu ul {
+            list-style: none; /* Remove default list styling */
+            padding: 0;
+            width: 100%; /* Full width */
+        }
+        .side-menu li {
+            margin: 20px 0; /* Space between items */
+            width: 100%; /* Full width for buttons */
+        }
+        .side-menu a {
+            text-decoration: none; /* Remove underline */
+            color: black; /* Black link color */
+            font-size: 1.2em; /* Link size */
+            display: flex; /* Flexbox for icon and text alignment */
+            align-items: center;
+            padding: 10px 15px; /* Padding for clickable area */
+            border-radius: 5px; /* Rounded corners for buttons */
+            transition: background-color 0.3s; /* Smooth color transition */
+        }
+        .side-menu a:hover {
+            background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+        }
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px; /* Position the toggle button to the left */
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            z-index: 3; /* Above the menu */
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+        .menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        /* Add animation classes */
+        .menu-open {
+            left: 0; /* Show the menu */
+            opacity: 1; /* Make visible */
+            pointer-events: auto; /* Enable interaction */
+        }
+        /* Call button styles */
+        .call-button {
+            display: inline-block;
+            background-color: white;
+            color: black;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            cursor: pointer;
+            margin-top: 30px; /* Space above the button */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .call-button:hover {
+            background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+        }
+        /* Description font style */
+        .content p {
+            font-family: 'Times New Roman', Times, serif; /* Use Times New Roman for description */
+            color: white; /* Ensure text is visible */
+        }
+        /* Button scale animation */
+        .menu-toggle.x {
+            transform: scale(1.2); /* Scale effect when open */
+            transition: transform 0.3s ease; /* Smooth scaling */
+        }
+        .menu-toggle.x:hover {
+            background-color: rgba(200, 200, 200, 0.5); /* Darker background on hover when open */
+        }
+    </style>
+</head>
+<body>
+    <div id="vanta-background"></div>
+    
+    <div class="content">
+        <div class="logo"></div> <!-- Logo Image as a div with background -->
+        <h1>QUANTA LAB</h1>
+        <p>At Quanta Lab, we specialize in innovative technology solutions that empower businesses to achieve their goals. Our team of experts is dedicated to delivering high-quality services and products that cater to the unique needs of each client.</p>
+        <p>From software development to data analysis, we offer a comprehensive range of services designed to enhance productivity and drive growth. Join us in transforming the way you do business.</p>
+        <a href="tel:+9647502015912" class="call-button">Call Us: +9647502015912</a> <!-- Call button linked to phone number -->
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">&#9776;</button> <!-- Hamburger Icon -->
+    
+    <div class="side-menu" id="sideMenu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=University+of+Zakho,+Zakho,+Iraq" target="_blank"><i class="fas fa-map-marker-alt"></i> Find Us</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+            <!-- Add more options as needed -->
+        </ul>
+        <button id="menuClose">Close</button> <!-- Close button -->
+    </div>
+
+    <script>
+        VANTA.NET({
+            el: "#vanta-background",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xded0d0,
+            backgroundColor: 0x0,
+            points: 19.00,
+            maxDistance: 12.00,
+            spacing: 12.00
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sideMenu = document.getElementById('sideMenu');
+
+        menuToggle.addEventListener('click', () => {
+            sideMenu.classList.toggle('menu-open'); // Toggle the menu open/close
+            sideMenu.style.opacity = sideMenu.classList.contains('menu-open') ? '1' : '0'; // Adjust opacity
+            sideMenu.style.pointerEvents = sideMenu.classList.contains('menu-open') ? 'auto' : 'none'; // Enable/disable interaction
+
+            // Change button icon and add animation
+            if (sideMenu.classList.contains('menu-open')) {
+                menuToggle.innerHTML = '&times;'; // Set to 'X'
+                menuToggle.classList.add('x'); // Add class for scaling effect
+            } else {
+                menuToggle.innerHTML = '&#9776;'; // Set to hamburger
+                menuToggle.classList.remove('x'); // Remove class for scaling effect
+            }
+        });
+
+        const menuClose = document.getElementById('menuClose');
+        menuClose.addEventListener('click', () => {
+            sideMenu.classList.remove('menu-open'); // Close the menu
+            sideMenu.style.opacity = '0'; // Adjust opacity
+            sideMenu.style.pointerEvents = 'none'; // Disable interaction
+            menuToggle.innerHTML = '&#9776;'; // Revert back to hamburger icon
+            menuToggle.classList.remove('x'); // Remove class for scaling effect
+        });
+    </script>
+</body>
+</html>

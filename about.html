@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Quanta Lab</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling */
+            color: white; /* Text color */
+            font-family: 'Times New Roman', Times, serif; /* Font style */
+        }
+        #vanta-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Places the background behind other content */
+        }
+        .content {
+            position: relative;
+            z-index: 1; /* Places content above the background */
+            text-align: center; /* Center text */
+            padding: 20px;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+        }
+        h1 {
+            font-size: 3em; /* Heading size */
+            margin: 20px 0; /* Space around heading */
+        }
+        p {
+            max-width: 800px; /* Limit paragraph width */
+            font-size: 1.2em; /* Paragraph size */
+            margin: 10px 0; /* Space above and below */
+        }
+    </style>
+</head>
+<body>
+    <div id="vanta-background"></div>
+    
+    <div class="content">
+        <h1>About Us</h1>
+        <p>Welcome to Quanta Lab, where innovation meets technology. We are a dedicated team of professionals committed to providing cutting-edge solutions tailored to your business needs. Our services range from software development and data analysis to IT consultancy, ensuring that we meet the unique demands of each client.</p>
+        <p>Located in Zakho, we take pride in our community roots and strive to empower local businesses through our services. Whether you're looking to enhance productivity, streamline operations, or implement the latest technology, Quanta Lab is here to help.</p>
+        <p>Join us in transforming your business with innovative solutions that drive growth and success. Together, we can achieve great things!</p>
+    </div>
+
+    <script>
+        VANTA.WAVES({
+            el: "#vanta-background",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x10609
+        });
+    </script>
+</body>
+</html>
