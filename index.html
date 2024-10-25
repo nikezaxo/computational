@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
     <style>
+
+        
         @font-face {
             font-family: 'Yoster';
             src: url('fonts/yoster.ttf') format('truetype');
@@ -230,26 +232,31 @@
             </p>
         </div>
     </div>
+    <!-- Our Stuff Section -->
+<div class="our-stuff-section">
+    <h2>Our Stuff</h2>
+    <p>Here you can describe what 'Our Stuff' includes, such as products, tools, or any other relevant content related to your services.</p>
+</div>
+
     <!-- Horizontal Photo Gallery -->
 <div class="gallery">
     <div class="gallery-item">
-        <img src="images/1.png" alt="Nihad">
-        <p>Nihad</p>
+        <img src="images/1.png" alt="Dr hayder">
+        <p>Dr hayder</p>
     </div>
     <div class="gallery-item">
-        <img src="images/2.jpg" alt="Hayder">
-        <p>Hayder</p>
+        <img src="images/2.jpg" alt="dev nihad">
+        <p>Dev Nihad</p>
     </div>
     <div class="gallery-item">
-        <img src="images/3.jpg" alt="Shinwar">
-        <p>Shinwar</p>
+        <img src="images/3.jpg" alt="Dr Shinwar">
+        <p>Dr Shinwar</p>
     </div>
     <div class="gallery-item">
-        <img src="images/4.jpg" alt="Sabir">
-        <p>Sabir</p>
+        <img src="images/4.jpg" alt="Dr Sabir">
     </div>
     <div class="gallery-item">
-        <img src="images/5.jpg" alt="Ahmad">
+        <img src="images/5.jpg" alt="staff Ahmad">
         <p>Ahmad</p>
     </div>
 </div>
@@ -266,13 +273,13 @@
 }
 
 .gallery-item {
-    margin: 2px; /* Adjust margin for smaller screens */
+    margin: 30px; /* Adjust margin for smaller screens */
     text-align: center; /* Center text under images */
     flex: 1 1 200px; /* Allow items to grow and shrink */
 }
 
 .gallery-item img {
-    width: 25%; /* Set width to 100% for responsive images */
+    width: 50%; /* Set width to 100% for responsive images */
     height: auto; /* Maintain aspect ratio */
     transition: transform 0.3s; /* Transition effect on hover */
 }
@@ -282,15 +289,37 @@
 }
 
 .gallery-item p {
-    margin-top: 20px; /* Space above the name */
+    margin-top: 15px; /* Space above the name */
     color: white; /* Text color */
     font-size: 1.2em; /* Font size for the names */
 }
 
+/* Slide-up transition for Our Stuff section */
+.our-stuff-section {
+    transform: translateY(100%); /* Start from below */
+    opacity: 0; /* Start invisible */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Transition for smoothness */
+}
+
+.our-stuff-section.show {
+    transform: translateY(0); /* Move to original position */
+    opacity: 1; /* Fade in */
+}
 
 </style>
 
-    
+<style>
+    /* Existing CSS styles */
+
+    /* Make gallery images round */
+    .gallery img {
+        border-radius: 43%; /* This makes the images round */
+        object-fit: cover; /* This ensures the image covers the entire area */
+        width: 150px; /* Set a fixed width */
+        height: 300px; /* Set a fixed height */
+        margin: 20px; /* Add some spacing between images */
+    }
+</style>
 <!-- Existing content above -->
 
  <!-- End of content section -->
@@ -339,8 +368,8 @@
     }
 
     .gallery-item img {
-        width: 25%;
-        height: 25%;
+        width: 50%;
+        height: 50%;
         object-fit: cover;
         transition: transform 0.3s ease; /* Image scaling effect */
     }
@@ -465,5 +494,10 @@
             menuToggle.classList.remove('x'); // Remove class for scaling effect
         });
     </script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ourStuffSection = document.querySelector('.our-stuff-section');
+        ourStuffSection.classList.add('show'); // Add the class to trigger the animation
+    });
+    
 </body>
 </html>
