@@ -230,6 +230,179 @@
             </p>
         </div>
     </div>
+    <!-- Horizontal Photo Gallery -->
+<div class="gallery">
+    <div class="gallery-item">
+        <img src="images/1.png" alt="Nihad">
+        <p>Nihad</p>
+    </div>
+    <div class="gallery-item">
+        <img src="images/2.jpg" alt="Hayder">
+        <p>Hayder</p>
+    </div>
+    <div class="gallery-item">
+        <img src="images/3.jpg" alt="Shinwar">
+        <p>Shinwar</p>
+    </div>
+    <div class="gallery-item">
+        <img src="images/4.jpg" alt="Sabir">
+        <p>Sabir</p>
+    </div>
+    <div class="gallery-item">
+        <img src="images/5.jpg" alt="Ahmad">
+        <p>Ahmad</p>
+    </div>
+</div>
+
+
+<style>
+    .gallery {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the items */
+    align-items: flex-end; /* Align items at the bottom */
+    margin: 50px 0; /* Margin above and below the gallery */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.gallery-item {
+    margin: 0 15px; /* Space between items */
+    text-align: center; /* Center text under images */
+}
+
+.gallery-item img {
+    width: 100px; /* Set width of images */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s; /* Transition effect on hover */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.2); /* Enlarge image on hover */
+}
+
+.gallery-item p {
+    margin-top: 10px; /* Space above the name */
+    color: white; /* Text color */
+    font-size: 1.2em; /* Font size for the names */
+}
+
+</style>
+
+    
+<!-- Existing content above -->
+
+ <!-- End of content section -->
+
+<h2 class="page-title">Our Candidate</h2> <!-- Title at the bottom of the page -->
+
+<style>
+    /* Existing styles... */
+
+    /* Style for the Title */
+    .page-title {
+        text-align: center; /* Center the title */
+        font-size: 2.5em; /* Font size for the title */
+        color: white; /* Title color */
+        margin-top: 20px; /* Space above the title */
+        margin-bottom: 50px; /* Space below the title */
+    }
+</style>
+
+<style>
+    /* Horizontal Photo Gallery Styles */
+    .horizontal-gallery {
+        margin-top: 50px;
+        text-align: center;
+        overflow: hidden; /* Hide overflow for sliding effect */
+        padding: 20px;
+        position: relative;
+    }
+
+    .gallery-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease; /* Smooth sliding effect */
+        gap: 20px;
+    }
+
+    .gallery-item {
+        flex-shrink: 0; /* Prevent items from shrinking */
+        transition: transform 0.3s ease; /* Smooth hover effect */
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 10px; /* Optional: Slightly rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease; /* Image scaling effect */
+    }
+
+    /* Scale the hovered image */
+    .gallery-item:hover {
+        transform: scale(1.2); /* Increase size on hover */
+        z-index: 1; /* Make sure it appears on top */
+    }
+
+    /* Slide Left and Right Buttons */
+    .slide-left, .slide-right {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .slide-left {
+        left: 10px;
+    }
+
+    .slide-right {
+        right: 10px;
+    }
+</style>
+
+<!-- Add JS for sliding effect -->
+<script>
+    const container = document.querySelector('.gallery-container');
+    const slideLeftBtn = document.createElement('button');
+    const slideRightBtn = document.createElement('button');
+    
+    // Set button classes and text
+    slideLeftBtn.className = 'slide-left';
+    slideLeftBtn.innerHTML = '&#9664;'; // Left arrow
+    slideRightBtn.className = 'slide-right';
+    slideRightBtn.innerHTML = '&#9654;'; // Right arrow
+
+    // Append buttons to the gallery
+    document.querySelector('.horizontal-gallery').appendChild(slideLeftBtn);
+    document.querySelector('.horizontal-gallery').appendChild(slideRightBtn);
+
+    let scrollAmount = 0;
+
+    // Slide left function
+    slideLeftBtn.addEventListener('click', function() {
+        scrollAmount -= 200;
+        container.style.transform = `translateX(${scrollAmount}px)`;
+    });
+
+    // Slide right function
+    slideRightBtn.addEventListener('click', function() {
+        scrollAmount += 200;
+        container.style.transform = `translateX(${scrollAmount}px)`;
+    });
+</script>
+
+
+
 
     <button class="menu-toggle" id="menuToggle">&#9776;</button> <!-- Hamburger Icon -->
     
