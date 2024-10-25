@@ -20,8 +20,9 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevents scrolling */
             font-family: 'Yoster', cursive; /* Use the Yoster font for the main body */
+            height: 100%; /* Full height for body */
+            overflow: auto; /* Allow scrolling */
         }
         #vanta-background {
             position: absolute;
@@ -40,8 +41,8 @@
             display: flex;
             flex-direction: column; /* Stack elements vertically */
             align-items: center; /* Center horizontally */
-            justify-content: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
+            justify-content: flex-start; /* Align content to the top */
+            height: auto; /* Allow height to adjust */
         }
         .logo {
             width: 150px; /* Adjust size as needed */
@@ -160,25 +161,74 @@
             font-family: 'Times New Roman', Times, serif; /* Use Times New Roman for description */
             color: white; /* Ensure text is visible */
         }
+        /* Our Services Section */
+        .services-section {
+            text-align: center; /* Center the content */
+            color: white; /* Text color */
+            padding: 50px 20px; /* Padding for spacing */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: Semi-transparent background for contrast */
+            border-radius: 10px; /* Rounded corners */
+            margin-top: 20px; /* Space above this section */
+            opacity: 0; /* Start invisible */
+            animation: fadeIn 2s forwards 1s; /* Fade in effect with delay */
+        }
+        .services-section h2 {
+            font-size: 3em; /* Large title size */
+            margin-bottom: 20px; /* Space below the title */
+            animation: collide 2s ease forwards; /* Collide animation */
+        }
+        .services-section p {
+            font-family: 'Times New Roman', Times, serif; /* Font style */
+            max-width: 800px; /* Max width for paragraph */
+            margin: 0 auto; /* Center the paragraph */
+            line-height: 1.6; /* Line height for readability */
+            opacity: 0; /* Start invisible */
+            animation: fadeIn 2s forwards 2s; /* Fade in effect with delay */
+        }
+        @keyframes collide {
+            0% {
+                transform: translateY(0); /* Start position */
+            }
+            50% {
+                transform: translateY(-10px); /* Move up slightly */
+            }
+            100% {
+                transform: translateY(0); /* Return to start */
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0; /* Start invisible */
+            }
+            to {
+                opacity: 1; /* End visible */
+            }
+        }
         /* Button scale animation */
         .menu-toggle.x {
-            transform: scale(1.2); /* Scale effect when open */
-            transition: transform 0.3s ease; /* Smooth scaling */
-        }
-        .menu-toggle.x:hover {
-            background-color: rgba(200, 200, 200, 0.5); /* Darker background on hover when open */
+            transform: scale(1.1); /* Scale effect */
         }
     </style>
 </head>
 <body>
-    <div id="vanta-background"></div>
-    
+    <div id="vanta-background"></div> <!-- Vanta.js Background -->
     <div class="content">
-        <div class="logo"></div> <!-- Logo Image as a div with background -->
-        <h1>QUANTA LAB</h1>
-        <p>At Quanta Lab, we specialize in innovative technology solutions that empower businesses to achieve their goals. Our team of experts is dedicated to delivering high-quality services and products that cater to the unique needs of each client.</p>
-        <p>From software development to data analysis, we offer a comprehensive range of services designed to enhance productivity and drive growth. Join us in transforming the way you do business.</p>
-        <a href="tel:+9647502015912" class="call-button">Call Us: +9647502015912</a> <!-- Call button linked to phone number -->
+        <div class="logo"></div> <!-- Logo -->
+        <h1>Welcome to Quanta Lab</h1>
+        <p>Your partner in innovation and technology solutions.</p>
+
+        <a href="tel:+1234567890" class="call-button">Call Us</a> <!-- Call button linked to phone number -->
+
+        <div class="services-section">
+            <h2><i class="fas fa-users"></i> Our Services</h2>
+            <p>We provide a variety of services to help our clients succeed, including:</p>
+            <p>
+                - <strong>Software Development:</strong> Custom software solutions tailored to your business needs.<br>
+                - <strong>Data Analysis:</strong> Transforming data into actionable insights to drive strategic decisions.<br>
+                - <strong>Consulting Services:</strong> Expert guidance to help you navigate technological challenges.<br>
+                - <strong>Support & Maintenance:</strong> Ongoing support to ensure your systems run smoothly.
+            </p>
+        </div>
     </div>
 
     <button class="menu-toggle" id="menuToggle">&#9776;</button> <!-- Hamburger Icon -->
